@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright,expect
 
 def test_draganddrop():
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=False)
+        browser=p.chromium.launch()
         page=browser.new_page()
         page.goto("https://testing.qaautomationlabs.com/drag-and-drop.php")
         page.wait_for_load_state("load")
@@ -14,5 +14,3 @@ def test_draganddrop():
         page.drag_and_drop("ul#sortableList>li:has-text('Item 1')","ul#sortableList>li:has-text('Item 5')")
         #source_element.drag_to(target_element)
         page.wait_for_timeout(5000)
-        page.pause()
-

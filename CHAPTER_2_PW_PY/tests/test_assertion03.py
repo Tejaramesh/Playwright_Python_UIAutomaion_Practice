@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright,expect
 
 def test_endtoendassertion():
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=False)
+        browser=p.chromium.launch()
         page=browser.new_page()
         page.goto("https://shop.qaautomationlabs.com/index.php")
         page.get_by_title("Email").fill("demo@demo.com")
@@ -17,5 +17,4 @@ def test_endtoendassertion():
         page.locator("[title='Cart']").click()
         print(page.locator("#cartTable>tbody").inner_text())
         assert page.locator("#cartTable>tbody").inner_text().count("Black T-Shirt")>0 
-        expect(page.locator("#cartTable>tbody")).to_contain_text("Black T-Shirt")  
-        page.pause()
+        expect(page.locator("#cartTable>tbody")).to_contain_text("Black T-Shirt")

@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 
 def test_handletabs():
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=False)
+        browser=p.chromium.launch()
         context=browser.new_context()
         page1=context.new_page()
         page1.goto("https://qaautomationlabs.com")
@@ -13,8 +13,11 @@ def test_handletabs():
         print(f"Tab 2 Title: {page2.title()}")
         #simulate clicking a link that opens a new tab
         #using a demp site that opens a new tab on click
-        page1.goto("https://the-internet.herokuapp.com/windows",timeout=60000)
-        page1.wait_for_load_state("domcontentloaded",timeout=60000)
+        page1.goto(
+            "https://the-internet.herokuapp.com/windows",
+            wait_until="domcontentloaded",
+            timeout=60000,
+        )
         with context.expect_page() as new_page:
             page1.get_by_role('link', name='Click Here').click(timeout=60000)
         page3=new_page.value
@@ -39,5 +42,3 @@ def test_handletabs():
         for i ,page in enumerate(context.pages):
             print(f"Tab {i+1} : {page.title()}")
         browser.close()
-
-

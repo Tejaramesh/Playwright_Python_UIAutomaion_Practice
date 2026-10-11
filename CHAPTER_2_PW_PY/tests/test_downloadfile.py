@@ -3,7 +3,7 @@ import os
 
 def test_downloadfile():
     with sync_playwright() as p:
-        browser=p.chromium.launch(headless=False)
+        browser=p.chromium.launch()
         page=browser.new_page()
         page.goto("https://testing.qaautomationlabs.com/file-download.php")
         page.wait_for_load_state("load")
@@ -18,4 +18,3 @@ def test_downloadfile():
         download.save_as(os.path.join("downloads","playwright_test_file.txt"))
             
         page.get_by_role("link",name="Download File").click()
-        page.pause()
