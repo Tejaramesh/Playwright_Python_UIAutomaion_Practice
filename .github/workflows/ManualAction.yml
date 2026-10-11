@@ -1,0 +1,7 @@
+name: run unit test of feature branches
+on:
+ push:
+   branches: master
+   
+ 
+
