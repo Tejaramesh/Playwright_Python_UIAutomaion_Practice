@@ -1,0 +1,20 @@
+name: run unit test of feature branches
+on:
+ push:
+   branches: master
+
+jobs:
+  run-unit-tests:
+   runs-on: windows-2025-vs2026
+
+   steps:
+       - name: Checkout
+         uses: actions/checkout@v6.1.0
+       - name: run unit test
+         run: pytest
+   
+    
+  
+   
+ 
+
